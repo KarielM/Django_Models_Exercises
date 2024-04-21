@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.dateparse import parse_date
+from datetime import datetime
 
 # from django.core.validators import MaxValueValidator
 
@@ -8,8 +9,9 @@ class Gradebook(models.Model):
     assignment_name = models.CharField(max_length=20)
     percentage = models.IntegerField(default = 0)
     student_name = models.CharField(max_length=20)
-    date = models.DateField()
+    date = models.DateField(default = None)
     notes = models.TextField(default = None, null = True)
+
 
 def validate_date_format(value):
     try:
@@ -17,7 +19,7 @@ def validate_date_format(value):
     except:
         raise ValueError
 
-def create_grade(assignment, percentage, name, date, notes=None):
+def create_grade(assignment, percentage, name, date=None, notes=None):
     if not 0 <= percentage <= 100:
         raise ValueError
     
@@ -70,3 +72,9 @@ def filter_grades_greaterthan(assignment, percentage):
     if not 0 <= percentage <= 100:
         raise ValueError
     return Gradebook.objects.filter(assignment_name = assignment, percentage__gte=percentage)
+
+
+def update_date(id):
+    try: 
+        date_to_change = find_grade(id)
+        date_to_change.date = datetime.now().strftime('%m-%d')
