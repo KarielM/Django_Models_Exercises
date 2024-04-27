@@ -1,5 +1,6 @@
 from django.test import TestCase
 from app import models
+from datetime import datetime
 
 # Create your tests here.
 class Test_Gradebook(TestCase):
@@ -201,3 +202,17 @@ class Test_Gradebook(TestCase):
         grade1 = models.create_grade('exam', 30, 'Ariel')
 
         self.assertEqual(grade1.date, None)
+
+    def test_update_date_2(self):
+        grade1 = models.create_grade('exam', 30, 'Ariel')
+
+        new_grade = models.update_date(1)
+
+        self.assertEqual(new_grade.date, datetime.now().strftime('%Y-%m-%d'))
+
+    def test_update_date_3(self):
+        grade1 = models.create_grade('exam', 30, 'Ariel')
+
+        new_grade = models.update_date(1)
+
+        self.assertEqual(new_grade.date, '2024-04-21')

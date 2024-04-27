@@ -18,6 +18,6 @@ In this practice you need to accomplish the following:
 - [x] Remove a grade from the system (Delete a grade model)
 - [x] Filter grades by student name.
 - [x] Filter grades by assignment name.
-- [ ] Filter grades by assignment name and greater than or equal to a percentage.
+- [x] Filter grades by assignment name and greater than or equal to a percentage.
 
 4. You should write your own tests for each of these functionalities.
